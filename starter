@@ -1,0 +1,37 @@
+import os
+import cv2
+
+def filter_photos(directory):
+    # Specify the directory containing the photos
+    photo_dir = directory
+
+    # Loop through each file in the directory
+    for file_name in os.listdir(photo_dir):
+        # Check if the file is an image file
+        if file_name.endswith('.jpg') or file_name.endswith('.jpeg') or file_name.endswith('.png'):
+            # Load the image using OpenCV
+            image_path = os.path.join(photo_dir, file_name)
+            image = cv2.imread(image_path)
+
+            # Perform image analysis and filtering logic here
+            # You can use OpenCV functions or other image processing libraries to analyze the image quality, composition, etc.
+            # Apply the filtering criteria defined by the user
+
+            # If the image passes the filtering criteria, you can save or display it
+            # For example, you can save the filtered images to a separate directory
+            filtered_dir = os.path.join(photo_dir, 'filtered')
+            if not os.path.exists(filtered_dir):
+                os.makedirs(filtered_dir)
+
+            filtered_image_path = os.path.join(filtered_dir, file_name)
+            cv2.imwrite(filtered_image_path, image)
+
+def main():
+    # Specify the directory containing the photos you want to filter
+    photo_directory = 'path_to_your_photo_directory'
+
+    # Call the filter_photos function to start filtering the photos
+    filter_photos(photo_directory)
+
+if __name__ == '__main__':
+    main()
